@@ -3,7 +3,7 @@ package com.hand13;
 import com.hand13.exception.JSONException;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,7 +14,7 @@ import java.util.Set;
 public class JSONObject {
     private Map<String,Object> objects;
     public JSONObject(Lexer lexer) throws JSONException {
-        objects = new HashMap<>();
+        objects = new LinkedHashMap<>();
         char c = lexer.nextClean();
         if(c != '{'){
             throw new JSONException("object should be started with {");
@@ -43,6 +43,7 @@ public class JSONObject {
                     lexer.goBack();
                     JSONArray array = new JSONArray(lexer);
                     objects.put(name,array);
+                    break;
                 }
                 default:{
                     lexer.goBack();

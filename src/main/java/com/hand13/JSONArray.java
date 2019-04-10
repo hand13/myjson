@@ -68,7 +68,7 @@ public class JSONArray {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
         for (Object object : objects) {
-            stringBuilder.append(object);
+            stringBuilder.append(object.toString());
             stringBuilder.append(",");
         }
         stringBuilder.replace(stringBuilder.length()-1,stringBuilder.length(),"");

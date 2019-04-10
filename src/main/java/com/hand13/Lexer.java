@@ -83,7 +83,7 @@ public class Lexer {
         StringBuilder result = new StringBuilder();
         if(c == '"') {
             c = nextClean();
-            while(c >' ' && c != '"') {
+            while(c >=' ' && c != '"') {
                 result.append(c);
                 c = next();
             }
@@ -102,6 +102,7 @@ public class Lexer {
             number.append(c);
             c = next();
         }
+        this.goBack();
         return new BigDecimal(number.toString());
     }
  }
