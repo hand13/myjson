@@ -11,7 +11,7 @@ import java.util.List;
  * @author $Author$
  * @version $Revision$ $Date$
  */
-public class JSONArray implements Iterable<Object>{
+public class JSONArray implements Iterable<Object>,JSONEntity{
     public List<Object> objects;
 
     public JSONArray(Lexer lexer) throws JSONException {
@@ -82,6 +82,26 @@ public class JSONArray implements Iterable<Object>{
     @Override
     public Iterator<Object> iterator() {
         return new JSONArrayIterator();
+    }
+
+    @Override
+    public String toJSON() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Object object : objects) {
+            if(object instanceof  JSONEntity) {
+                stringBuilder.append(((JSONEntity) object).toJSON());
+            }if(object instanceof  String){
+                stringBuilder.append("\"").append(object).append("\"");
+            }
+            else {
+                stringBuilder.append(object.toString());
+            }
+            stringBuilder.append(",");
+        }
+        stringBuilder.replace(stringBuilder.length()-1,stringBuilder.length(),"");
+        stringBuilder.append("]");
+        return stringBuilder.toString();
     }
 
     public class JSONArrayIterator implements  Iterator<Object>{

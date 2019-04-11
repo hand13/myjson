@@ -66,7 +66,10 @@ public class Lexer {
         StringBuilder result = new StringBuilder();
         if(c == '"') {
             c = nextClean();
-            while((c>='a' && c<= 'z') ||(c>= 'A' && c <= 'Z')) {
+            if(c >='0' && c <= '9'){
+                throw new JSONException("key should not start with number");
+            }
+            while((c>='a' && c<= 'z') ||(c>= 'A' && c <= 'Z') || (c >='0' && c<= '9')) {
                 result.append(c);
                 c = next();
             }

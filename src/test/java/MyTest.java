@@ -18,5 +18,6 @@ public class MyTest {
         System.out.println(object.getString("name"));
         System.out.println(object.getString("password"));
         System.out.println(object);
+        System.out.println(object.toJSON());
     }
 }

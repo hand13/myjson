@@ -11,7 +11,7 @@ import java.util.Set;
  * @version $Revision$ $Date$
  * @author $Author$
 */
-public class JSONObject {
+public class JSONObject implements JSONEntity{
     private Map<String,Object> objects;
     public JSONObject(Lexer lexer) throws JSONException {
         objects = new LinkedHashMap<>();
@@ -80,6 +80,31 @@ public class JSONObject {
         for(String key :keys) {
             i++;
             stringBuilder.append(key).append(":").append(objects.get(key));
+            if(i < keys.size()){
+                stringBuilder.append(",");
+            }
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String toJSON() {
+        Set<String> keys = objects.keySet();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{");
+        int i = 0;
+        for(String key :keys) {
+            i++;
+            stringBuilder.append("\"").append(key).append("\"").append(":");
+            Object o = objects.get(key);
+            if(o instanceof  String) {
+                stringBuilder.append("\"").append(o).append("\"");
+            }else if(o instanceof JSONEntity) {
+                stringBuilder.append(((JSONEntity) o).toJSON());
+            }else {
+                stringBuilder.append(o.toString());
+            }
             if(i < keys.size()){
                 stringBuilder.append(",");
             }
