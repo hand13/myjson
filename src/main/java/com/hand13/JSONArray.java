@@ -4,13 +4,14 @@ import com.hand13.exception.JSONException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author $Author$
  * @version $Revision$ $Date$
  */
-public class JSONArray {
+public class JSONArray implements Iterable<Object>{
     public List<Object> objects;
 
     public JSONArray(Lexer lexer) throws JSONException {
@@ -58,10 +59,12 @@ public class JSONArray {
         }
     }
 
-    public List<Object> getObjects() {
-        return objects;
+    public int size(){
+        return objects.size();
     }
-
+    public Object getObject(int i ) {
+        return objects.get(i);
+    }
 
     @Override
     public String toString() {
@@ -74,5 +77,27 @@ public class JSONArray {
         stringBuilder.replace(stringBuilder.length()-1,stringBuilder.length(),"");
         stringBuilder.append("]");
         return stringBuilder.toString();
+    }
+
+    @Override
+    public Iterator<Object> iterator() {
+        return new JSONArrayIterator();
+    }
+
+    public class JSONArrayIterator implements  Iterator<Object>{
+        private int i;
+        private JSONArrayIterator() {
+            i = -1;
+        }
+        @Override
+        public boolean hasNext() {
+            return i < objects.size()-1;
+        }
+
+        @Override
+        public Object next() {
+            i++;
+            return objects.get(i);
+        }
     }
 }
