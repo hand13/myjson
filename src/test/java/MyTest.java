@@ -1,5 +1,6 @@
 import com.hand13.JSONObject;
 import com.hand13.Lexer;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -15,9 +16,7 @@ public class MyTest {
         InputStream in = this.getClass().getResourceAsStream("test.json");
         Lexer lexer = new Lexer(new InputStreamReader(in));
         JSONObject object = new JSONObject(lexer);
-        System.out.println(object.getString("name"));
-        System.out.println(object.getString("password"));
-        System.out.println(object);
+        Assert.assertEquals(object.getInt("id"),12);
         System.out.println(object.toJSON());
     }
 }

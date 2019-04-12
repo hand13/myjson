@@ -63,12 +63,48 @@ public class JSONObject implements JSONEntity{
             }
         }
     }
+
     public String getString(String key) throws JSONException {
         Object o = objects.get(key);
         if(o instanceof  String){
             return (String)o;
         }else
             throw new JSONException("not a string");
+    }
+    public JSONArray getArray(String key) throws JSONException{
+        Object o = objects.get(key);
+        if(o instanceof JSONArray) {
+            return (JSONArray)o;
+        }else {
+            throw new JSONException("not a array");
+        }
+    }
+
+    public JSONObject getObject(String key)throws JSONException{
+        Object o = objects.get(key);
+        if(o instanceof JSONObject) {
+            return (JSONObject)o;
+        }else {
+            throw new JSONException("not a object");
+        }
+    }
+
+    public int getInt(String key)throws JSONException{
+        Object o = objects.get(key);
+        if(o instanceof BigDecimal) {
+            return ((BigDecimal) o).intValue();
+        }else {
+            throw new JSONException("not a number");
+        }
+    }
+
+    public float getFloat(String key)throws JSONException{
+        Object o = objects.get(key);
+        if(o instanceof BigDecimal) {
+            return ((BigDecimal) o).floatValue();
+        }else {
+            throw new JSONException("not a number");
+        }
     }
 
     @Override
