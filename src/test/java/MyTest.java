@@ -17,6 +17,7 @@ public class MyTest {
         Lexer lexer = new Lexer(new InputStreamReader(in));
         JSONObject object = new JSONObject(lexer);
         Assert.assertEquals(object.getInt("id"),12);
+        Assert.assertTrue(object.getBoolean("human"));
         System.out.println(object.toJSON());
     }
 }

@@ -108,4 +108,15 @@ public class Lexer {
         this.goBack();
         return new BigDecimal(number.toString());
     }
+
+    public String getCString()throws JSONException{
+        char c = nextClean();
+        StringBuilder str = new StringBuilder();
+        while(c >' ' && c !=','){
+            str.append(c);
+            c = next();
+        }
+        this.goBack();
+        return str.toString();
+    }
  }
