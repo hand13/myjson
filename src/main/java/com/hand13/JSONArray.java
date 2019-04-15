@@ -39,6 +39,7 @@ public class JSONArray implements Iterable<Object>,JSONEntity{
                     lexer.goBack();
                     JSONArray array = new JSONArray(lexer);
                     objects.add(array);
+                    break;
                 }
                 default: {
                     lexer.goBack();
